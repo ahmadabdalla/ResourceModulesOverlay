@@ -1,0 +1,32 @@
+name: '.Platform: Broken Links Check'
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '**/*.md'
+
+jobs:
+  build:
+    name: Broken Links Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          # Full git history is needed to get a proper list of changed files within `super-linter`
+          fetch-depth: 0
+
+      # Ref https://github.com/marketplace/actions/lychee-broken-link-checker and https://github.com/lycheeverse/lychee#commandline-parameters
+      - name: Check Broken Links
+        if: always()
+        id: checker
+        uses: lycheeverse/lychee-action@v1.5.4
+        with:
+          args: --verbose --no-progress './**/*.md' --accept 200,201,403,429,401 --exclude-path .lycheeignore --include ^file:.*docs.*wiki.*media.*$
+          fail: true
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
