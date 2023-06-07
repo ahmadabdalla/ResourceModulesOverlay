@@ -13,10 +13,14 @@
       "overlays": {
         "subscription": "20d6fbfe-b049-471c-95af-1369d14d0d45",
         "resourceGroup": "overlays-rg"
+      },
+      "artifacts": {
+        "subscription": "20d6fbfe-b049-471c-95af-1369d14d0d45",
+        "resourceGroup": "artifacts-rg"
       }
     },
     "br": {
-      "overlays": {
+      "artifacts": {
         "registry": "ahmadcarmldemobr.azurecr.io",
         "modulePath": "bicep/modules"
       }

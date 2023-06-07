@@ -51,7 +51,7 @@ This section gives you an overview of all local-referenced module files (i.e., o
 
 | Reference | Type |
 | :-- | :-- |
-| `br/overlays:managed-identity.user-assigned-identities:0.4.4` | Remote reference |
+| `br/artifacts:managed-identity.user-assigned-identities:latest` | Remote reference |
 
 ## Deployment examples
 
