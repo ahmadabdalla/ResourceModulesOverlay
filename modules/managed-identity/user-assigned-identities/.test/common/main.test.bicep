@@ -17,10 +17,6 @@ param serviceShort string = 'miuaicom'
 @description('Optional. A token to inject into the name of each resource.')
 param namePrefix string = '<<namePrefix>>'
 
-// ============ //
-// Dependencies //
-// ============ //
-
 // General resources
 // =================
 resource resourceGroup 'Microsoft.Resources/resourceGroups@2021-04-01' = {
@@ -37,5 +33,6 @@ module testDeployment '../../main.bicep' = {
   name: '${uniqueString(deployment().name, location)}-test-${serviceShort}'
   params: {
     name: '${namePrefix}${serviceShort}001'
+    location: location
   }
 }

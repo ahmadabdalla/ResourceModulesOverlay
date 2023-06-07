@@ -1,5 +1,5 @@
-@description('Optional. Name of the User Assigned Identity.')
-param name string = guid(resourceGroup().id)
+@description('Required. Name of the User Assigned Identity.')
+param name string
 
 @description('Optional. Location for all resources.')
 param location string = resourceGroup().location
@@ -8,6 +8,7 @@ module userMsi 'ts/overlays:managed-identity.user-assigned-identities:latest' = 
   name: '${uniqueString(deployment().name, location)}-UserMSI'
   params: {
     name: name
+    location: location
     enableDefaultTelemetry: false
     tags: {
       moduleType: 'overlay'
