@@ -15,7 +15,7 @@ param location string = deployment().location
 param serviceShort string = 'miuaicom'
 
 @description('Optional. A token to inject into the name of each resource.')
-param namePrefix string = 'rrdxa'
+param namePrefix string = '<<namePrefix>>'
 
 // ============ //
 // Dependencies //
