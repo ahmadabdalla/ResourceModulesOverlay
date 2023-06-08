@@ -19,7 +19,7 @@ resource defaultTelemetry 'Microsoft.Resources/deployments@2021-04-01' = if (ena
   }
 }
 
-module userMsi 'br/artifacts:managed-identity.user-assigned-identities:latest' = {
+module userMsi 'ts/artifacts:managed-identity.user-assigned-identities:latest' = {
   name: '${uniqueString(deployment().name, location)}-UserMSI'
   params: {
     name: name

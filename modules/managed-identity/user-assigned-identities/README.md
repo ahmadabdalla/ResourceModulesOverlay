@@ -14,9 +14,6 @@ This module deploys a user assigned identity (Overlay).
 
 | Resource Type | API Version |
 | :-- | :-- |
-| `Microsoft.Authorization/locks` | [2020-05-01](https://learn.microsoft.com/en-us/azure/templates/Microsoft.Authorization/2020-05-01/locks) |
-| `Microsoft.Authorization/roleAssignments` | [2022-04-01](https://learn.microsoft.com/en-us/azure/templates/Microsoft.Authorization/2022-04-01/roleAssignments) |
-| `Microsoft.ManagedIdentity/userAssignedIdentities` | [2018-11-30](https://learn.microsoft.com/en-us/azure/templates/Microsoft.ManagedIdentity/2018-11-30/userAssignedIdentities) |
 
 ## Parameters
 
@@ -51,7 +48,7 @@ This section gives you an overview of all local-referenced module files (i.e., o
 
 | Reference | Type |
 | :-- | :-- |
-| `br/artifacts:managed-identity.user-assigned-identities:latest` | Remote reference |
+| `ts/artifacts:managed-identity.user-assigned-identities:latest` | Remote reference |
 
 ## Deployment examples
 
