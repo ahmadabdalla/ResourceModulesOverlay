@@ -25,7 +25,7 @@ module userMsiOverlay '../user-assigned-identities/main.bicep' = {
     location: location
     tags: {
       type: 'overlay'
-      version: 'source-control'
+      version: 'local'
     }
   }
 }
