@@ -1,4 +1,4 @@
-# Private Endpoints (Overlay Local) `[Microsoft.Network/privateEndpointsOverlayLocal]`
+# Private Endpoints (Overlay Remote) `[Microsoft.Network/privateEndpointsOverlayRemote]`
 
 This template deploys a private endpoint for a generic service.
 
@@ -284,7 +284,7 @@ This section gives you an overview of all local-referenced module files (i.e., o
 
 | Reference | Type |
 | :-- | :-- |
-| `network/private-endpoints` | Local reference |
+| `br/artifacts:network.private-endpoints:latest` | Remote reference |
 
 ## Deployment examples
 
@@ -300,14 +300,14 @@ The following module usage examples are retrieved from the content of the files 
 <summary>via Bicep module</summary>
 
 ```bicep
-module privateEndpointsOverlayLocal './network/private-endpoints-overlay-local/main.bicep' = {
-  name: '${uniqueString(deployment().name, location)}-test-npeol'
+module privateEndpointsOverlayRemote './network/private-endpoints-overlay-remote/main.bicep' = {
+  name: '${uniqueString(deployment().name, location)}-test-npeor'
   params: {
     // Required parameters
     groupIds: [
       'vault'
     ]
-    name: '<<namePrefix>>npeol001'
+    name: '<<namePrefix>>npeor001'
     serviceResourceId: '<serviceResourceId>'
     subnetResourceId: '<subnetResourceId>'
     // Non-required parameters
@@ -316,7 +316,7 @@ module privateEndpointsOverlayLocal './network/private-endpoints-overlay-local/m
         id: '<id>'
       }
     ]
-    customNetworkInterfaceName: '<<namePrefix>>npeol001nic'
+    customNetworkInterfaceName: '<<namePrefix>>npeor001nic'
     enableDefaultTelemetry: '<enableDefaultTelemetry>'
     ipConfigurations: [
       {
@@ -328,6 +328,7 @@ module privateEndpointsOverlayLocal './network/private-endpoints-overlay-local/m
         }
       }
     ]
+    location: '<location>'
     lock: 'CanNotDelete'
     privateDnsZoneGroup: {
       privateDNSResourceIds: [
@@ -361,7 +362,7 @@ module privateEndpointsOverlayLocal './network/private-endpoints-overlay-local/m
       ]
     },
     "name": {
-      "value": "<<namePrefix>>npeol001"
+      "value": "<<namePrefix>>npeor001"
     },
     "serviceResourceId": {
       "value": "<serviceResourceId>"
@@ -378,7 +379,7 @@ module privateEndpointsOverlayLocal './network/private-endpoints-overlay-local/m
       ]
     },
     "customNetworkInterfaceName": {
-      "value": "<<namePrefix>>npeol001nic"
+      "value": "<<namePrefix>>npeor001nic"
     },
     "enableDefaultTelemetry": {
       "value": "<enableDefaultTelemetry>"
@@ -394,6 +395,9 @@ module privateEndpointsOverlayLocal './network/private-endpoints-overlay-local/m
           }
         }
       ]
+    },
+    "location": {
+      "value": "<location>"
     },
     "lock": {
       "value": "CanNotDelete"
