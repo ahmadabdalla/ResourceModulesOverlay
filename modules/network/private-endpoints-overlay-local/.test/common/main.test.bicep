@@ -12,7 +12,7 @@ param resourceGroupName string = 'ms.network.privateendpoints-${serviceShort}-rg
 param location string = deployment().location
 
 @description('Optional. A short identifier for the kind of deployment. Should be kept short to not run into resource-name length-constraints.')
-param serviceShort string = 'npecom'
+param serviceShort string = 'npeol'
 
 @description('Optional. Enable telemetry via a Globally Unique Identifier (GUID).')
 param enableDefaultTelemetry bool = true
@@ -63,15 +63,6 @@ module testDeployment '../../main.bicep' = {
         nestedDependencies.outputs.privateDNSZoneResourceId
       ]
     }
-    roleAssignments: [
-      {
-        roleDefinitionIdOrName: 'Reader'
-        principalIds: [
-          nestedDependencies.outputs.managedIdentityPrincipalId
-        ]
-        principalType: 'ServicePrincipal'
-      }
-    ]
     ipConfigurations: [
       {
         name: 'myIPconfig'

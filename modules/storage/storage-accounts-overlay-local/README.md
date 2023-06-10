@@ -418,15 +418,12 @@ module storageAccountsOverlayLocal './storage/storage-accounts-overlay-local/mai
     // Required parameters
     name: '<<namePrefix>>ssaolc001'
     // Non-required parameters
-    allowBlobPublicAccess: false
     blobServices: {
       automaticSnapshotPolicyEnabled: true
       containerDeleteRetentionPolicyDays: 10
       containerDeleteRetentionPolicyEnabled: true
       containers: [
         {
-          enableNfsV3AllSquash: true
-          enableNfsV3RootSquash: true
           name: 'avdscripts'
           publicAccess: 'None'
           roleAssignments: [
@@ -452,27 +449,12 @@ module storageAccountsOverlayLocal './storage/storage-accounts-overlay-local/mai
       ]
       deleteRetentionPolicy: true
       deleteRetentionPolicyDays: 9
-      diagnosticEventHubAuthorizationRuleId: '<diagnosticEventHubAuthorizationRuleId>'
-      diagnosticEventHubName: '<diagnosticEventHubName>'
-      diagnosticLogsRetentionInDays: 7
-      diagnosticStorageAccountId: '<diagnosticStorageAccountId>'
-      diagnosticWorkspaceId: '<diagnosticWorkspaceId>'
     }
-    diagnosticEventHubAuthorizationRuleId: '<diagnosticEventHubAuthorizationRuleId>'
-    diagnosticEventHubName: '<diagnosticEventHubName>'
-    diagnosticLogsRetentionInDays: 7
-    diagnosticStorageAccountId: '<diagnosticStorageAccountId>'
-    diagnosticWorkspaceId: '<diagnosticWorkspaceId>'
     enableDefaultTelemetry: '<enableDefaultTelemetry>'
     enableHierarchicalNamespace: true
     enableNfsV3: true
     enableSftp: true
     fileServices: {
-      diagnosticEventHubAuthorizationRuleId: '<diagnosticEventHubAuthorizationRuleId>'
-      diagnosticEventHubName: '<diagnosticEventHubName>'
-      diagnosticLogsRetentionInDays: 7
-      diagnosticStorageAccountId: '<diagnosticStorageAccountId>'
-      diagnosticWorkspaceId: '<diagnosticWorkspaceId>'
       shares: [
         {
           name: 'avdprofiles'
@@ -512,22 +494,6 @@ module storageAccountsOverlayLocal './storage/storage-accounts-overlay-local/mai
       }
     ]
     lock: 'CanNotDelete'
-    networkAcls: {
-      bypass: 'AzureServices'
-      defaultAction: 'Deny'
-      ipRules: [
-        {
-          action: 'Allow'
-          value: '1.1.1.1'
-        }
-      ]
-      virtualNetworkRules: [
-        {
-          action: 'Allow'
-          id: '<id>'
-        }
-      ]
-    }
     privateEndpoints: [
       {
         privateDnsZoneGroup: {
@@ -544,11 +510,6 @@ module storageAccountsOverlayLocal './storage/storage-accounts-overlay-local/mai
       }
     ]
     queueServices: {
-      diagnosticEventHubAuthorizationRuleId: '<diagnosticEventHubAuthorizationRuleId>'
-      diagnosticEventHubName: '<diagnosticEventHubName>'
-      diagnosticLogsRetentionInDays: 7
-      diagnosticStorageAccountId: '<diagnosticStorageAccountId>'
-      diagnosticWorkspaceId: '<diagnosticWorkspaceId>'
       queues: [
         {
           metadata: {
@@ -572,7 +533,6 @@ module storageAccountsOverlayLocal './storage/storage-accounts-overlay-local/mai
         }
       ]
     }
-    requireInfrastructureEncryption: true
     roleAssignments: [
       {
         principalIds: [
@@ -586,11 +546,6 @@ module storageAccountsOverlayLocal './storage/storage-accounts-overlay-local/mai
     skuName: 'Standard_LRS'
     systemAssignedIdentity: true
     tableServices: {
-      diagnosticEventHubAuthorizationRuleId: '<diagnosticEventHubAuthorizationRuleId>'
-      diagnosticEventHubName: '<diagnosticEventHubName>'
-      diagnosticLogsRetentionInDays: 7
-      diagnosticStorageAccountId: '<diagnosticStorageAccountId>'
-      diagnosticWorkspaceId: '<diagnosticWorkspaceId>'
       tables: [
         'table1'
         'table2'
@@ -624,9 +579,6 @@ module storageAccountsOverlayLocal './storage/storage-accounts-overlay-local/mai
       "value": "<<namePrefix>>ssaolc001"
     },
     // Non-required parameters
-    "allowBlobPublicAccess": {
-      "value": false
-    },
     "blobServices": {
       "value": {
         "automaticSnapshotPolicyEnabled": true,
@@ -634,8 +586,6 @@ module storageAccountsOverlayLocal './storage/storage-accounts-overlay-local/mai
         "containerDeleteRetentionPolicyEnabled": true,
         "containers": [
           {
-            "enableNfsV3AllSquash": true,
-            "enableNfsV3RootSquash": true,
             "name": "avdscripts",
             "publicAccess": "None",
             "roleAssignments": [
@@ -660,28 +610,8 @@ module storageAccountsOverlayLocal './storage/storage-accounts-overlay-local/mai
           }
         ],
         "deleteRetentionPolicy": true,
-        "deleteRetentionPolicyDays": 9,
-        "diagnosticEventHubAuthorizationRuleId": "<diagnosticEventHubAuthorizationRuleId>",
-        "diagnosticEventHubName": "<diagnosticEventHubName>",
-        "diagnosticLogsRetentionInDays": 7,
-        "diagnosticStorageAccountId": "<diagnosticStorageAccountId>",
-        "diagnosticWorkspaceId": "<diagnosticWorkspaceId>"
+        "deleteRetentionPolicyDays": 9
       }
-    },
-    "diagnosticEventHubAuthorizationRuleId": {
-      "value": "<diagnosticEventHubAuthorizationRuleId>"
-    },
-    "diagnosticEventHubName": {
-      "value": "<diagnosticEventHubName>"
-    },
-    "diagnosticLogsRetentionInDays": {
-      "value": 7
-    },
-    "diagnosticStorageAccountId": {
-      "value": "<diagnosticStorageAccountId>"
-    },
-    "diagnosticWorkspaceId": {
-      "value": "<diagnosticWorkspaceId>"
     },
     "enableDefaultTelemetry": {
       "value": "<enableDefaultTelemetry>"
@@ -697,11 +627,6 @@ module storageAccountsOverlayLocal './storage/storage-accounts-overlay-local/mai
     },
     "fileServices": {
       "value": {
-        "diagnosticEventHubAuthorizationRuleId": "<diagnosticEventHubAuthorizationRuleId>",
-        "diagnosticEventHubName": "<diagnosticEventHubName>",
-        "diagnosticLogsRetentionInDays": 7,
-        "diagnosticStorageAccountId": "<diagnosticStorageAccountId>",
-        "diagnosticWorkspaceId": "<diagnosticWorkspaceId>",
         "shares": [
           {
             "name": "avdprofiles",
@@ -748,24 +673,6 @@ module storageAccountsOverlayLocal './storage/storage-accounts-overlay-local/mai
     "lock": {
       "value": "CanNotDelete"
     },
-    "networkAcls": {
-      "value": {
-        "bypass": "AzureServices",
-        "defaultAction": "Deny",
-        "ipRules": [
-          {
-            "action": "Allow",
-            "value": "1.1.1.1"
-          }
-        ],
-        "virtualNetworkRules": [
-          {
-            "action": "Allow",
-            "id": "<id>"
-          }
-        ]
-      }
-    },
     "privateEndpoints": {
       "value": [
         {
@@ -785,11 +692,6 @@ module storageAccountsOverlayLocal './storage/storage-accounts-overlay-local/mai
     },
     "queueServices": {
       "value": {
-        "diagnosticEventHubAuthorizationRuleId": "<diagnosticEventHubAuthorizationRuleId>",
-        "diagnosticEventHubName": "<diagnosticEventHubName>",
-        "diagnosticLogsRetentionInDays": 7,
-        "diagnosticStorageAccountId": "<diagnosticStorageAccountId>",
-        "diagnosticWorkspaceId": "<diagnosticWorkspaceId>",
         "queues": [
           {
             "metadata": {
@@ -814,9 +716,6 @@ module storageAccountsOverlayLocal './storage/storage-accounts-overlay-local/mai
         ]
       }
     },
-    "requireInfrastructureEncryption": {
-      "value": true
-    },
     "roleAssignments": {
       "value": [
         {
@@ -839,11 +738,6 @@ module storageAccountsOverlayLocal './storage/storage-accounts-overlay-local/mai
     },
     "tableServices": {
       "value": {
-        "diagnosticEventHubAuthorizationRuleId": "<diagnosticEventHubAuthorizationRuleId>",
-        "diagnosticEventHubName": "<diagnosticEventHubName>",
-        "diagnosticLogsRetentionInDays": 7,
-        "diagnosticStorageAccountId": "<diagnosticStorageAccountId>",
-        "diagnosticWorkspaceId": "<diagnosticWorkspaceId>",
         "tables": [
           "table1",
           "table2"
@@ -859,430 +753,6 @@ module storageAccountsOverlayLocal './storage/storage-accounts-overlay-local/mai
     "userAssignedIdentities": {
       "value": {
         "<managedIdentityResourceId>": {}
-      }
-    }
-  }
-}
-```
-
-</details>
-<p>
-
-<h3>Example 2: Encr</h3>
-
-<details>
-
-<summary>via Bicep module</summary>
-
-```bicep
-module storageAccountsOverlayLocal './storage/storage-accounts-overlay-local/main.bicep' = {
-  name: '${uniqueString(deployment().name, location)}-test-ssaole'
-  params: {
-    // Required parameters
-    name: '<<namePrefix>>ssaole001'
-    // Non-required parameters
-    allowBlobPublicAccess: false
-    blobServices: {
-      automaticSnapshotPolicyEnabled: true
-      changeFeedEnabled: true
-      changeFeedRetentionInDays: 10
-      containerDeleteRetentionPolicyAllowPermanentDelete: true
-      containerDeleteRetentionPolicyDays: 10
-      containerDeleteRetentionPolicyEnabled: true
-      containers: [
-        {
-          name: '<<namePrefix>>container'
-          publicAccess: 'None'
-        }
-      ]
-      defaultServiceVersion: '2008-10-27'
-      deleteRetentionPolicy: true
-      deleteRetentionPolicyDays: 9
-      isVersioningEnabled: true
-      lastAccessTimeTrackingPolicyEnable: true
-      restorePolicyDays: 8
-      restorePolicyEnabled: true
-    }
-    cMKKeyName: '<cMKKeyName>'
-    cMKKeyVaultResourceId: '<cMKKeyVaultResourceId>'
-    cMKUserAssignedIdentityResourceId: '<cMKUserAssignedIdentityResourceId>'
-    enableDefaultTelemetry: '<enableDefaultTelemetry>'
-    privateEndpoints: [
-      {
-        privateDnsZoneGroup: {
-          privateDNSResourceIds: [
-            '<privateDNSZoneResourceId>'
-          ]
-        }
-        service: 'blob'
-        subnetResourceId: '<subnetResourceId>'
-        tags: {
-          Environment: 'Non-Prod'
-          Role: 'DeploymentValidation'
-        }
-      }
-    ]
-    requireInfrastructureEncryption: true
-    skuName: 'Standard_LRS'
-    systemAssignedIdentity: false
-    tags: {
-      Environment: 'Non-Prod'
-      Role: 'DeploymentValidation'
-    }
-    userAssignedIdentities: {
-      '<managedIdentityResourceId>': {}
-    }
-  }
-}
-```
-
-</details>
-<p>
-
-<details>
-
-<summary>via JSON Parameter file</summary>
-
-```json
-{
-  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    // Required parameters
-    "name": {
-      "value": "<<namePrefix>>ssaole001"
-    },
-    // Non-required parameters
-    "allowBlobPublicAccess": {
-      "value": false
-    },
-    "blobServices": {
-      "value": {
-        "automaticSnapshotPolicyEnabled": true,
-        "changeFeedEnabled": true,
-        "changeFeedRetentionInDays": 10,
-        "containerDeleteRetentionPolicyAllowPermanentDelete": true,
-        "containerDeleteRetentionPolicyDays": 10,
-        "containerDeleteRetentionPolicyEnabled": true,
-        "containers": [
-          {
-            "name": "<<namePrefix>>container",
-            "publicAccess": "None"
-          }
-        ],
-        "defaultServiceVersion": "2008-10-27",
-        "deleteRetentionPolicy": true,
-        "deleteRetentionPolicyDays": 9,
-        "isVersioningEnabled": true,
-        "lastAccessTimeTrackingPolicyEnable": true,
-        "restorePolicyDays": 8,
-        "restorePolicyEnabled": true
-      }
-    },
-    "cMKKeyName": {
-      "value": "<cMKKeyName>"
-    },
-    "cMKKeyVaultResourceId": {
-      "value": "<cMKKeyVaultResourceId>"
-    },
-    "cMKUserAssignedIdentityResourceId": {
-      "value": "<cMKUserAssignedIdentityResourceId>"
-    },
-    "enableDefaultTelemetry": {
-      "value": "<enableDefaultTelemetry>"
-    },
-    "privateEndpoints": {
-      "value": [
-        {
-          "privateDnsZoneGroup": {
-            "privateDNSResourceIds": [
-              "<privateDNSZoneResourceId>"
-            ]
-          },
-          "service": "blob",
-          "subnetResourceId": "<subnetResourceId>",
-          "tags": {
-            "Environment": "Non-Prod",
-            "Role": "DeploymentValidation"
-          }
-        }
-      ]
-    },
-    "requireInfrastructureEncryption": {
-      "value": true
-    },
-    "skuName": {
-      "value": "Standard_LRS"
-    },
-    "systemAssignedIdentity": {
-      "value": false
-    },
-    "tags": {
-      "value": {
-        "Environment": "Non-Prod",
-        "Role": "DeploymentValidation"
-      }
-    },
-    "userAssignedIdentities": {
-      "value": {
-        "<managedIdentityResourceId>": {}
-      }
-    }
-  }
-}
-```
-
-</details>
-<p>
-
-<h3>Example 3: Min</h3>
-
-<details>
-
-<summary>via Bicep module</summary>
-
-```bicep
-module storageAccountsOverlayLocal './storage/storage-accounts-overlay-local/main.bicep' = {
-  name: '${uniqueString(deployment().name, location)}-test-ssaolm'
-  params: {
-    // Required parameters
-    name: '<<namePrefix>>ssaolm001'
-    // Non-required parameters
-    allowBlobPublicAccess: false
-    enableDefaultTelemetry: '<enableDefaultTelemetry>'
-  }
-}
-```
-
-</details>
-<p>
-
-<details>
-
-<summary>via JSON Parameter file</summary>
-
-```json
-{
-  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    // Required parameters
-    "name": {
-      "value": "<<namePrefix>>ssaolm001"
-    },
-    // Non-required parameters
-    "allowBlobPublicAccess": {
-      "value": false
-    },
-    "enableDefaultTelemetry": {
-      "value": "<enableDefaultTelemetry>"
-    }
-  }
-}
-```
-
-</details>
-<p>
-
-<h3>Example 4: Nfs</h3>
-
-<details>
-
-<summary>via Bicep module</summary>
-
-```bicep
-module storageAccountsOverlayLocal './storage/storage-accounts-overlay-local/main.bicep' = {
-  name: '${uniqueString(deployment().name, location)}-test-ssaoln'
-  params: {
-    // Required parameters
-    name: '<<namePrefix>>ssaoln001'
-    // Non-required parameters
-    allowBlobPublicAccess: false
-    diagnosticEventHubAuthorizationRuleId: '<diagnosticEventHubAuthorizationRuleId>'
-    diagnosticEventHubName: '<diagnosticEventHubName>'
-    diagnosticLogsRetentionInDays: 7
-    diagnosticStorageAccountId: '<diagnosticStorageAccountId>'
-    diagnosticWorkspaceId: '<diagnosticWorkspaceId>'
-    enableDefaultTelemetry: '<enableDefaultTelemetry>'
-    fileServices: {
-      shares: [
-        {
-          enabledProtocols: 'NFS'
-          name: 'nfsfileshare'
-        }
-      ]
-    }
-    kind: 'FileStorage'
-    lock: 'CanNotDelete'
-    roleAssignments: [
-      {
-        principalIds: [
-          '<managedIdentityPrincipalId>'
-        ]
-        principalType: 'ServicePrincipal'
-        roleDefinitionIdOrName: 'Reader'
-      }
-    ]
-    skuName: 'Premium_LRS'
-    supportsHttpsTrafficOnly: false
-    systemAssignedIdentity: true
-    tags: {
-      Environment: 'Non-Prod'
-      Role: 'DeploymentValidation'
-    }
-    userAssignedIdentities: {
-      '<managedIdentityResourceId>': {}
-    }
-  }
-}
-```
-
-</details>
-<p>
-
-<details>
-
-<summary>via JSON Parameter file</summary>
-
-```json
-{
-  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    // Required parameters
-    "name": {
-      "value": "<<namePrefix>>ssaoln001"
-    },
-    // Non-required parameters
-    "allowBlobPublicAccess": {
-      "value": false
-    },
-    "diagnosticEventHubAuthorizationRuleId": {
-      "value": "<diagnosticEventHubAuthorizationRuleId>"
-    },
-    "diagnosticEventHubName": {
-      "value": "<diagnosticEventHubName>"
-    },
-    "diagnosticLogsRetentionInDays": {
-      "value": 7
-    },
-    "diagnosticStorageAccountId": {
-      "value": "<diagnosticStorageAccountId>"
-    },
-    "diagnosticWorkspaceId": {
-      "value": "<diagnosticWorkspaceId>"
-    },
-    "enableDefaultTelemetry": {
-      "value": "<enableDefaultTelemetry>"
-    },
-    "fileServices": {
-      "value": {
-        "shares": [
-          {
-            "enabledProtocols": "NFS",
-            "name": "nfsfileshare"
-          }
-        ]
-      }
-    },
-    "kind": {
-      "value": "FileStorage"
-    },
-    "lock": {
-      "value": "CanNotDelete"
-    },
-    "roleAssignments": {
-      "value": [
-        {
-          "principalIds": [
-            "<managedIdentityPrincipalId>"
-          ],
-          "principalType": "ServicePrincipal",
-          "roleDefinitionIdOrName": "Reader"
-        }
-      ]
-    },
-    "skuName": {
-      "value": "Premium_LRS"
-    },
-    "supportsHttpsTrafficOnly": {
-      "value": false
-    },
-    "systemAssignedIdentity": {
-      "value": true
-    },
-    "tags": {
-      "value": {
-        "Environment": "Non-Prod",
-        "Role": "DeploymentValidation"
-      }
-    },
-    "userAssignedIdentities": {
-      "value": {
-        "<managedIdentityResourceId>": {}
-      }
-    }
-  }
-}
-```
-
-</details>
-<p>
-
-<h3>Example 5: V1</h3>
-
-<details>
-
-<summary>via Bicep module</summary>
-
-```bicep
-module storageAccountsOverlayLocal './storage/storage-accounts-overlay-local/main.bicep' = {
-  name: '${uniqueString(deployment().name, location)}-test-ssaol1'
-  params: {
-    // Required parameters
-    name: '<<namePrefix>>ssaol1001'
-    // Non-required parameters
-    allowBlobPublicAccess: false
-    enableDefaultTelemetry: '<enableDefaultTelemetry>'
-    kind: 'Storage'
-    tags: {
-      Environment: 'Non-Prod'
-      Role: 'DeploymentValidation'
-    }
-  }
-}
-```
-
-</details>
-<p>
-
-<details>
-
-<summary>via JSON Parameter file</summary>
-
-```json
-{
-  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    // Required parameters
-    "name": {
-      "value": "<<namePrefix>>ssaol1001"
-    },
-    // Non-required parameters
-    "allowBlobPublicAccess": {
-      "value": false
-    },
-    "enableDefaultTelemetry": {
-      "value": "<enableDefaultTelemetry>"
-    },
-    "kind": {
-      "value": "Storage"
-    },
-    "tags": {
-      "value": {
-        "Environment": "Non-Prod",
-        "Role": "DeploymentValidation"
       }
     }
   }

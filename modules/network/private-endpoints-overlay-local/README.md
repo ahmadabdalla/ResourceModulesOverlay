@@ -1,4 +1,4 @@
-# Private Endpoints `[Microsoft.Network/privateEndpoints]`
+# Private Endpoints `[Microsoft.Network/privateEndpointsOverlayLocal]`
 
 This template deploys a private endpoint for a generic service.
 
@@ -47,13 +47,12 @@ The following resources are required to be able to deploy this resource:
 | `applicationSecurityGroups` | array | `[]` |  | Application security groups in which the private endpoint IP configuration is included. |
 | `customDnsConfigs` | array | `[]` |  | Custom DNS configurations. |
 | `customNetworkInterfaceName` | string | `''` |  | The custom name of the network interface attached to the private endpoint. |
-| `enableDefaultTelemetry` | bool | `True` |  | Enable telemetry via a Globally Unique Identifier (GUID). |
+| `enableDefaultTelemetry` | bool | `False` |  | Enable telemetry via a Globally Unique Identifier (GUID). |
 | `ipConfigurations` | array | `[]` |  | A list of IP configurations of the private endpoint. This will be used to map to the First Party Service endpoints. |
 | `location` | string | `[resourceGroup().location]` |  | Location for all Resources. |
 | `lock` | string | `''` | `['', CanNotDelete, ReadOnly]` | Specify the type of lock. |
 | `manualPrivateLinkServiceConnections` | array | `[]` |  | Manual PrivateLink Service Connections. |
 | `privateDnsZoneGroup` | object | `{object}` |  | The private DNS zone group configuration used to associate the private endpoint with one or multiple private DNS zones. A DNS zone group can support up to 5 DNS zones. |
-| `roleAssignments` | array | `[]` |  | Array of role assignment objects that contain the 'roleDefinitionIdOrName' and 'principalId' to define RBAC role assignments on this resource. In the roleDefinitionIdOrName attribute, you can provide either the display name of the role definition, or its fully qualified ID in the following format: '/providers/Microsoft.Authorization/roleDefinitions/c2f4ef07-c644-48eb-af81-4b1b4947fb11'. |
 | `tags` | object | `{object}` |  | Tags to be applied on all resources/resource groups in this deployment. |
 
 
@@ -281,7 +280,11 @@ ipConfigurations: [
 
 ## Cross-referenced modules
 
-_None_
+This section gives you an overview of all local-referenced module files (i.e., other CARML modules that are referenced in this module) and all remote-referenced files (i.e., Bicep modules that are referenced from a Bicep Registry or Template Specs).
+
+| Reference | Type |
+| :-- | :-- |
+| `network/private-endpoints` | Local reference |
 
 ## Deployment examples
 
@@ -297,14 +300,14 @@ The following module usage examples are retrieved from the content of the files 
 <summary>via Bicep module</summary>
 
 ```bicep
-module privateEndpoints './network/private-endpoints/main.bicep' = {
-  name: '${uniqueString(deployment().name, location)}-test-npecom'
+module privateEndpointsOverlayLocal './network/private-endpoints-overlay-local/main.bicep' = {
+  name: '${uniqueString(deployment().name, location)}-test-npeol'
   params: {
     // Required parameters
     groupIds: [
       'vault'
     ]
-    name: '<<namePrefix>>npecom001'
+    name: '<<namePrefix>>npeol001'
     serviceResourceId: '<serviceResourceId>'
     subnetResourceId: '<subnetResourceId>'
     // Non-required parameters
@@ -313,7 +316,7 @@ module privateEndpoints './network/private-endpoints/main.bicep' = {
         id: '<id>'
       }
     ]
-    customNetworkInterfaceName: '<<namePrefix>>npecom001nic'
+    customNetworkInterfaceName: '<<namePrefix>>npeol001nic'
     enableDefaultTelemetry: '<enableDefaultTelemetry>'
     ipConfigurations: [
       {
@@ -331,15 +334,6 @@ module privateEndpoints './network/private-endpoints/main.bicep' = {
         '<privateDNSZoneResourceId>'
       ]
     }
-    roleAssignments: [
-      {
-        principalIds: [
-          '<managedIdentityPrincipalId>'
-        ]
-        principalType: 'ServicePrincipal'
-        roleDefinitionIdOrName: 'Reader'
-      }
-    ]
     tags: {
       Environment: 'Non-Prod'
       Role: 'DeploymentValidation'
@@ -367,7 +361,7 @@ module privateEndpoints './network/private-endpoints/main.bicep' = {
       ]
     },
     "name": {
-      "value": "<<namePrefix>>npecom001"
+      "value": "<<namePrefix>>npeol001"
     },
     "serviceResourceId": {
       "value": "<serviceResourceId>"
@@ -384,7 +378,7 @@ module privateEndpoints './network/private-endpoints/main.bicep' = {
       ]
     },
     "customNetworkInterfaceName": {
-      "value": "<<namePrefix>>npecom001nic"
+      "value": "<<namePrefix>>npeol001nic"
     },
     "enableDefaultTelemetry": {
       "value": "<enableDefaultTelemetry>"
@@ -411,83 +405,11 @@ module privateEndpoints './network/private-endpoints/main.bicep' = {
         ]
       }
     },
-    "roleAssignments": {
-      "value": [
-        {
-          "principalIds": [
-            "<managedIdentityPrincipalId>"
-          ],
-          "principalType": "ServicePrincipal",
-          "roleDefinitionIdOrName": "Reader"
-        }
-      ]
-    },
     "tags": {
       "value": {
         "Environment": "Non-Prod",
         "Role": "DeploymentValidation"
       }
-    }
-  }
-}
-```
-
-</details>
-<p>
-
-<h3>Example 2: Min</h3>
-
-<details>
-
-<summary>via Bicep module</summary>
-
-```bicep
-module privateEndpoints './network/private-endpoints/main.bicep' = {
-  name: '${uniqueString(deployment().name, location)}-test-npemin'
-  params: {
-    // Required parameters
-    groupIds: [
-      'vault'
-    ]
-    name: '<<namePrefix>>npemin001'
-    serviceResourceId: '<serviceResourceId>'
-    subnetResourceId: '<subnetResourceId>'
-    // Non-required parameters
-    enableDefaultTelemetry: '<enableDefaultTelemetry>'
-  }
-}
-```
-
-</details>
-<p>
-
-<details>
-
-<summary>via JSON Parameter file</summary>
-
-```json
-{
-  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    // Required parameters
-    "groupIds": {
-      "value": [
-        "vault"
-      ]
-    },
-    "name": {
-      "value": "<<namePrefix>>npemin001"
-    },
-    "serviceResourceId": {
-      "value": "<serviceResourceId>"
-    },
-    "subnetResourceId": {
-      "value": "<subnetResourceId>"
-    },
-    // Non-required parameters
-    "enableDefaultTelemetry": {
-      "value": "<enableDefaultTelemetry>"
     }
   }
 }

@@ -152,7 +152,7 @@ module storageAccountOverlayLocal '../storage-accounts/main.bicep' = {
     kind: kind
     skuName: skuName
     userAssignedIdentities: userAssignedIdentities
-    systemAssignedIdentity: true
+    systemAssignedIdentity: systemAssignedIdentity
     tags: tags
     lock: lock
     roleAssignments: roleAssignments
