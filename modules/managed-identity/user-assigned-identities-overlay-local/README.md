@@ -168,10 +168,10 @@ The following module usage examples are retrieved from the content of the files 
 
 ```bicep
 module userAssignedIdentitiesOverlayLocal './managed-identity/user-assigned-identities-overlay-local/main.bicep' = {
-  name: '${uniqueString(deployment().name, location)}-test-miuaiocom'
+  name: '${uniqueString(deployment().name, location)}-test-miuaiol'
   params: {
     // Required parameters
-    name: '<<namePrefix>>miuaiocom001'
+    name: '<<namePrefix>>miuaiol001'
     // Non-required parameters
     enableDefaultTelemetry: '<enableDefaultTelemetry>'
   }
@@ -192,7 +192,7 @@ module userAssignedIdentitiesOverlayLocal './managed-identity/user-assigned-iden
   "parameters": {
     // Required parameters
     "name": {
-      "value": "<<namePrefix>>miuaiocom001"
+      "value": "<<namePrefix>>miuaiol001"
     },
     // Non-required parameters
     "enableDefaultTelemetry": {

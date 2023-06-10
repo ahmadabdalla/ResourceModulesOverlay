@@ -19,31 +19,33 @@ resource defaultTelemetry 'Microsoft.Resources/deployments@2021-04-01' = if (ena
   }
 }
 
-module userMsiOverlay '../user-assigned-identities/main.bicep' = {
-  name: name
+module userMsiOverlayLocal '../user-assigned-identities/main.bicep' = {
+  name: '${name}-local'
   params: {
+    name: name
     location: location
     tags: {
       type: 'overlay'
       version: 'local'
     }
+    enableDefaultTelemetry: false
   }
 }
 
 @description('The name of the user assigned identity.')
-output name string = userMsiOverlay.outputs.name
+output name string = userMsiOverlayLocal.outputs.name
 
 @description('The resource ID of the user assigned identity.')
-output resourceId string = userMsiOverlay.outputs.resourceId
+output resourceId string = userMsiOverlayLocal.outputs.resourceId
 
 @description('The principal ID (object ID) of the user assigned identity.')
-output principalId string = userMsiOverlay.outputs.principalId
+output principalId string = userMsiOverlayLocal.outputs.principalId
 
 @description('The client ID (application ID) of the user assigned identity.')
-output clientId string = userMsiOverlay.outputs.clientId
+output clientId string = userMsiOverlayLocal.outputs.clientId
 
 @description('The resource group the user assigned identity was deployed into.')
 output resourceGroupName string = resourceGroup().name
 
 @description('The location the resource was deployed into.')
-output location string = userMsiOverlay.outputs.location
+output location string = userMsiOverlayLocal.outputs.location
