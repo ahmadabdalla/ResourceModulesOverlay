@@ -1,4 +1,4 @@
-name: 'ManagedIdentity - UserAssignedIdentities (Overlay)'
+name: 'ManagedIdentity - UserAssignedIdentities (Overlay Local)'
 
 on:
   workflow_dispatch:
@@ -29,15 +29,15 @@ on:
     paths:
       - '.github/actions/templates/**'
       - '.github/workflows/template.module.yml'
-      - '.github/workflows/ms.managedidentity.userassignedidentitiesoverlay.yml'
-      - 'modules/managed-identity/user-assigned-identities-overlay/**'
+      - '.github/workflows/ms.managedidentity.userassignedidentitiesoverlaylocal.yml'
+      - 'modules/managed-identity/user-assigned-identities-overlay-local/**'
       - 'utilities/pipelines/**'
       - '!utilities/pipelines/deploymentRemoval/**'
       - '!*/**/README.md'
 
 env:
-  modulePath: 'modules/managed-identity/user-assigned-identities-overlay'
-  workflowPath: '.github/workflows/ms.managedidentity.userassignedidentitiesoverlay.yml'
+  modulePath: 'modules/managed-identity/user-assigned-identities-overlay-local'
+  workflowPath: '.github/workflows/ms.managedidentity.userassignedidentitiesoverlaylocal.yml'
 
 concurrency:
   group: ${{ github.workflow }}

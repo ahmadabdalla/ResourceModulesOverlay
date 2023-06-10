@@ -1,6 +1,6 @@
-# User Assigned Identities (Overlay) `[Microsoft.ManagedIdentity/userAssignedIdentitiesOverlay]`
+# User Assigned Identities (Overlay Remote) `[Microsoft.ManagedIdentity/userAssignedIdentitiesOverlayRemote]`
 
-This module deploys a user assigned identity (Overlay).
+This module deploys a user assigned identity (Overlay Remote).
 
 ## Navigation
 
@@ -151,7 +151,7 @@ This section gives you an overview of all local-referenced module files (i.e., o
 
 | Reference | Type |
 | :-- | :-- |
-| `managed-identity/user-assigned-identities` | Local reference |
+| `br/artifacts:managed-identity.user-assigned-identities:latest` | Remote reference |
 
 ## Deployment examples
 
@@ -167,7 +167,7 @@ The following module usage examples are retrieved from the content of the files 
 <summary>via Bicep module</summary>
 
 ```bicep
-module userAssignedIdentitiesOverlay './managed-identity/user-assigned-identities-overlay/main.bicep' = {
+module userAssignedIdentitiesOverlayRemote './managed-identity/user-assigned-identities-overlay-remote/main.bicep' = {
   name: '${uniqueString(deployment().name, location)}-test-miuaiocom'
   params: {
     // Required parameters

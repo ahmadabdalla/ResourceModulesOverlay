@@ -1,0 +1,6 @@
+{
+    "$schema": "https://aka.ms/bicep-registry-module-metadata-file-schema-v2#",
+    "name": "User Assigned Identities (Overlay Remote)",
+    "summary": "This module deploys a user assigned identity (Overlay Remote).",
+    "owner": "Azure/module-maintainers"
+}
