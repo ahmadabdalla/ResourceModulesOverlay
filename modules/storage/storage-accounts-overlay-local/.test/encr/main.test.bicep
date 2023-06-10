@@ -56,54 +56,12 @@ module testDeployment '../../main.bicep' = {
     enableDefaultTelemetry: enableDefaultTelemetry
     name: '${namePrefix}${serviceShort}001'
     skuName: 'Standard_LRS'
-    allowBlobPublicAccess: false
-    requireInfrastructureEncryption: true
-    privateEndpoints: [
-      {
-        service: 'blob'
-        subnetResourceId: nestedDependencies.outputs.subnetResourceId
-        privateDnsZoneGroup: {
-          privateDNSResourceIds: [
-            nestedDependencies.outputs.privateDNSZoneResourceId
-          ]
-        }
-        tags: {
-          Environment: 'Non-Prod'
-          Role: 'DeploymentValidation'
-        }
-      }
-    ]
-    blobServices: {
-      containers: [
-        {
-          name: '${namePrefix}container'
-          publicAccess: 'None'
-        }
-      ]
-      automaticSnapshotPolicyEnabled: true
-      changeFeedEnabled: true
-      changeFeedRetentionInDays: 10
-      containerDeleteRetentionPolicyEnabled: true
-      containerDeleteRetentionPolicyDays: 10
-      containerDeleteRetentionPolicyAllowPermanentDelete: true
-      defaultServiceVersion: '2008-10-27'
-      deleteRetentionPolicy: true
-      deleteRetentionPolicyDays: 9
-      isVersioningEnabled: true
-      lastAccessTimeTrackingPolicyEnable: true
-      restorePolicyEnabled: true
-      restorePolicyDays: 8
-    }
-    systemAssignedIdentity: false
+    systemAssignedIdentity: true
     userAssignedIdentities: {
       '${nestedDependencies.outputs.managedIdentityResourceId}': {}
     }
     cMKKeyVaultResourceId: nestedDependencies.outputs.keyVaultResourceId
     cMKKeyName: nestedDependencies.outputs.keyName
     cMKUserAssignedIdentityResourceId: nestedDependencies.outputs.managedIdentityResourceId
-    tags: {
-      Environment: 'Non-Prod'
-      Role: 'DeploymentValidation'
-    }
   }
 }

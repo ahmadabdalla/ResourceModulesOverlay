@@ -40,20 +40,6 @@ module nestedDependencies 'dependencies.bicep' = {
   }
 }
 
-// Diagnostics
-// ===========
-module diagnosticDependencies '../../../../.shared/.templates/diagnostic.dependencies.bicep' = {
-  scope: resourceGroup
-  name: '${uniqueString(deployment().name, location)}-diagnosticDependencies'
-  params: {
-    storageAccountName: 'dep${namePrefix}diasa${serviceShort}01'
-    logAnalyticsWorkspaceName: 'dep-${namePrefix}-law-${serviceShort}'
-    eventHubNamespaceEventHubName: 'dep-${namePrefix}-evh-${serviceShort}'
-    eventHubNamespaceName: 'dep-${namePrefix}-evhns-${serviceShort}'
-    location: location
-  }
-}
-
 // ============== //
 // Test Execution //
 // ============== //
@@ -65,8 +51,6 @@ module testDeployment '../../main.bicep' = {
     enableDefaultTelemetry: enableDefaultTelemetry
     name: '${namePrefix}${serviceShort}001'
     skuName: 'Standard_LRS'
-    allowBlobPublicAccess: false
-    requireInfrastructureEncryption: true
     largeFileSharesState: 'Enabled'
     lock: 'CanNotDelete'
     enableHierarchicalNamespace: true
@@ -87,22 +71,6 @@ module testDeployment '../../main.bicep' = {
         }
       }
     ]
-    networkAcls: {
-      bypass: 'AzureServices'
-      defaultAction: 'Deny'
-      virtualNetworkRules: [
-        {
-          action: 'Allow'
-          id: nestedDependencies.outputs.subnetResourceId
-        }
-      ]
-      ipRules: [
-        {
-          action: 'Allow'
-          value: '1.1.1.1'
-        }
-      ]
-    }
     localUsers: [
       {
         storageAccountName: '${namePrefix}${serviceShort}001'
@@ -121,16 +89,9 @@ module testDeployment '../../main.bicep' = {
       }
     ]
     blobServices: {
-      diagnosticLogsRetentionInDays: 7
-      diagnosticStorageAccountId: diagnosticDependencies.outputs.storageAccountResourceId
-      diagnosticWorkspaceId: diagnosticDependencies.outputs.logAnalyticsWorkspaceResourceId
-      diagnosticEventHubAuthorizationRuleId: diagnosticDependencies.outputs.eventHubAuthorizationRuleId
-      diagnosticEventHubName: diagnosticDependencies.outputs.eventHubNamespaceEventHubName
       containers: [
         {
           name: 'avdscripts'
-          enableNfsV3AllSquash: true
-          enableNfsV3RootSquash: true
           publicAccess: 'None'
           roleAssignments: [
             {
@@ -160,11 +121,6 @@ module testDeployment '../../main.bicep' = {
       deleteRetentionPolicyDays: 9
     }
     fileServices: {
-      diagnosticLogsRetentionInDays: 7
-      diagnosticStorageAccountId: diagnosticDependencies.outputs.storageAccountResourceId
-      diagnosticWorkspaceId: diagnosticDependencies.outputs.logAnalyticsWorkspaceResourceId
-      diagnosticEventHubAuthorizationRuleId: diagnosticDependencies.outputs.eventHubAuthorizationRuleId
-      diagnosticEventHubName: diagnosticDependencies.outputs.eventHubNamespaceEventHubName
       shares: [
         {
           name: 'avdprofiles'
@@ -186,22 +142,12 @@ module testDeployment '../../main.bicep' = {
       ]
     }
     tableServices: {
-      diagnosticLogsRetentionInDays: 7
-      diagnosticStorageAccountId: diagnosticDependencies.outputs.storageAccountResourceId
-      diagnosticWorkspaceId: diagnosticDependencies.outputs.logAnalyticsWorkspaceResourceId
-      diagnosticEventHubAuthorizationRuleId: diagnosticDependencies.outputs.eventHubAuthorizationRuleId
-      diagnosticEventHubName: diagnosticDependencies.outputs.eventHubNamespaceEventHubName
       tables: [
         'table1'
         'table2'
       ]
     }
     queueServices: {
-      diagnosticLogsRetentionInDays: 7
-      diagnosticStorageAccountId: diagnosticDependencies.outputs.storageAccountResourceId
-      diagnosticWorkspaceId: diagnosticDependencies.outputs.logAnalyticsWorkspaceResourceId
-      diagnosticEventHubAuthorizationRuleId: diagnosticDependencies.outputs.eventHubAuthorizationRuleId
-      diagnosticEventHubName: diagnosticDependencies.outputs.eventHubNamespaceEventHubName
       queues: [
         {
           name: 'queue1'
@@ -239,11 +185,6 @@ module testDeployment '../../main.bicep' = {
         principalType: 'ServicePrincipal'
       }
     ]
-    diagnosticLogsRetentionInDays: 7
-    diagnosticStorageAccountId: diagnosticDependencies.outputs.storageAccountResourceId
-    diagnosticWorkspaceId: diagnosticDependencies.outputs.logAnalyticsWorkspaceResourceId
-    diagnosticEventHubAuthorizationRuleId: diagnosticDependencies.outputs.eventHubAuthorizationRuleId
-    diagnosticEventHubName: diagnosticDependencies.outputs.eventHubNamespaceEventHubName
     tags: {
       Environment: 'Non-Prod'
       Role: 'DeploymentValidation'

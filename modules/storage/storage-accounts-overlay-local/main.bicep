@@ -176,7 +176,7 @@ module storageAccountOverlayLocal '../storage-accounts/main.bicep' = {
     supportsHttpsTrafficOnly: supportsHttpsTrafficOnly
     enableHierarchicalNamespace: enableHierarchicalNamespace
     enableSftp: enableSftp
-    enableNfsV3: enableNfsV3
+    enableNfsV3: false
     largeFileSharesState: largeFileSharesState
     minimumTlsVersion: 'TLS1_2'
     publicNetworkAccess: 'Disabled'
