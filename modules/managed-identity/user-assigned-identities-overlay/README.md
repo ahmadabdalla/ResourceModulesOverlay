@@ -1,6 +1,6 @@
-# User Assigned Identities `[Microsoft.ManagedIdentity/userAssignedIdentities]`
+# User Assigned Identities (Overlay) `[Microsoft.ManagedIdentity/userAssignedIdentitiesOverlay]`
 
-This module deploys a user assigned identity.
+This module deploys a user assigned identity (Overlay).
 
 ## Navigation
 
@@ -20,16 +20,18 @@ This module deploys a user assigned identity.
 
 ## Parameters
 
+**Required parameters**
+
+| Parameter Name | Type | Description |
+| :-- | :-- | :-- |
+| `name` | string | Name of the User Assigned Identity. |
+
 **Optional parameters**
 
-| Parameter Name | Type | Default Value | Allowed Values | Description |
-| :-- | :-- | :-- | :-- | :-- |
-| `enableDefaultTelemetry` | bool | `True` |  | Enable telemetry via a Globally Unique Identifier (GUID). |
-| `location` | string | `[resourceGroup().location]` |  | Location for all resources. |
-| `lock` | string | `''` | `['', CanNotDelete, ReadOnly]` | Specify the type of lock. |
-| `name` | string | `[guid(resourceGroup().id)]` |  | Name of the User Assigned Identity. |
-| `roleAssignments` | array | `[]` |  | Array of role assignment objects that contain the 'roleDefinitionIdOrName' and 'principalId' to define RBAC role assignments on this resource. In the roleDefinitionIdOrName attribute, you can provide either the display name of the role definition, or its fully qualified ID in the following format: '/providers/Microsoft.Authorization/roleDefinitions/c2f4ef07-c644-48eb-af81-4b1b4947fb11'. |
-| `tags` | object | `{object}` |  | Tags of the resource. |
+| Parameter Name | Type | Default Value | Description |
+| :-- | :-- | :-- | :-- |
+| `enableDefaultTelemetry` | bool | `True` | Enable telemetry via a Globally Unique Identifier (GUID). |
+| `location` | string | `[resourceGroup().location]` | Location for all resources. |
 
 
 ### Parameter Usage: `roleAssignments`
@@ -145,7 +147,11 @@ tags: {
 
 ## Cross-referenced modules
 
-_None_
+This section gives you an overview of all local-referenced module files (i.e., other CARML modules that are referenced in this module) and all remote-referenced files (i.e., Bicep modules that are referenced from a Bicep Registry or Template Specs).
+
+| Reference | Type |
+| :-- | :-- |
+| `managed-identity/user-assigned-identities` | Local reference |
 
 ## Deployment examples
 
@@ -161,25 +167,13 @@ The following module usage examples are retrieved from the content of the files 
 <summary>via Bicep module</summary>
 
 ```bicep
-module userAssignedIdentities './managed-identity/user-assigned-identities/main.bicep' = {
-  name: '${uniqueString(deployment().name, location)}-test-miuaicom'
+module userAssignedIdentitiesOverlay './managed-identity/user-assigned-identities-overlay/main.bicep' = {
+  name: '${uniqueString(deployment().name, location)}-test-miuaiocom'
   params: {
+    // Required parameters
+    name: '<<namePrefix>>miuaiocom001'
+    // Non-required parameters
     enableDefaultTelemetry: '<enableDefaultTelemetry>'
-    lock: 'CanNotDelete'
-    name: '<<namePrefix>>miuaicom001'
-    roleAssignments: [
-      {
-        principalIds: [
-          '<managedIdentityPrincipalId>'
-        ]
-        principalType: 'ServicePrincipal'
-        roleDefinitionIdOrName: 'Reader'
-      }
-    ]
-    tags: {
-      Environment: 'Non-Prod'
-      Role: 'DeploymentValidation'
-    }
   }
 }
 ```
@@ -196,31 +190,13 @@ module userAssignedIdentities './managed-identity/user-assigned-identities/main.
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
+    // Required parameters
+    "name": {
+      "value": "<<namePrefix>>miuaiocom001"
+    },
+    // Non-required parameters
     "enableDefaultTelemetry": {
       "value": "<enableDefaultTelemetry>"
-    },
-    "lock": {
-      "value": "CanNotDelete"
-    },
-    "name": {
-      "value": "<<namePrefix>>miuaicom001"
-    },
-    "roleAssignments": {
-      "value": [
-        {
-          "principalIds": [
-            "<managedIdentityPrincipalId>"
-          ],
-          "principalType": "ServicePrincipal",
-          "roleDefinitionIdOrName": "Reader"
-        }
-      ]
-    },
-    "tags": {
-      "value": {
-        "Environment": "Non-Prod",
-        "Role": "DeploymentValidation"
-      }
     }
   }
 }
