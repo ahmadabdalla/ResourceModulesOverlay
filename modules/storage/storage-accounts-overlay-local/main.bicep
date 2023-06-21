@@ -73,18 +73,6 @@ param customDomainName string = ''
 @description('Optional. Indicates whether indirect CName validation is enabled. This should only be set on updates.')
 param customDomainUseSubDomainName bool = false
 
-@description('Optional. Blob service and containers to deploy.')
-param blobServices object = {}
-
-@description('Optional. File service and shares to deploy.')
-param fileServices object = {}
-
-@description('Optional. Queue service and queues to create.')
-param queueServices object = {}
-
-@description('Optional. Table service and tables to create.')
-param tableServices object = {}
-
 @description('Conditional. If true, enables Hierarchical Namespace for the storage account. Required if enableSftp or enableNfsV3 is set to true.')
 param enableHierarchicalNamespace bool = false
 
@@ -184,10 +172,6 @@ module storageAccountOverlayLocal '../storage-accounts/main.bicep' = {
     allowBlobPublicAccess: false
     azureFilesIdentityBasedAuthentication: azureFilesIdentityBasedAuthentication
     managementPolicyRules: managementPolicyRules
-    blobServices: blobServices
-    fileServices: fileServices
-    queueServices: queueServices
-    tableServices: tableServices
   }
 }
 
