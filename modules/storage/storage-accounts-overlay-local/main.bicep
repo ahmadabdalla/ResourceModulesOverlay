@@ -85,9 +85,6 @@ param localUsers array = []
 @description('Optional. Enables local users feature, if set to true.')
 param isLocalUserEnabled bool = false
 
-@description('Optional. If true, enables NFS 3.0 support for the storage account. Requires enableHierarchicalNamespace to be true.')
-param enableNfsV3 bool = false
-
 @allowed([
   ''
   'CanNotDelete'

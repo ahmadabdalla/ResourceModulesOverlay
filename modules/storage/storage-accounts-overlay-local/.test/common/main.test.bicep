@@ -55,7 +55,6 @@ module testDeployment '../../main.bicep' = {
     lock: 'CanNotDelete'
     enableHierarchicalNamespace: true
     enableSftp: true
-    enableNfsV3: true
     privateEndpoints: [
       {
         service: 'blob'
@@ -88,89 +87,6 @@ module testDeployment '../../main.bicep' = {
         ]
       }
     ]
-    blobServices: {
-      containers: [
-        {
-          name: 'avdscripts'
-          publicAccess: 'None'
-          roleAssignments: [
-            {
-              roleDefinitionIdOrName: 'Reader'
-              principalIds: [
-                nestedDependencies.outputs.managedIdentityPrincipalId
-              ]
-              principalType: 'ServicePrincipal'
-            }
-          ]
-        }
-        {
-          name: 'archivecontainer'
-          publicAccess: 'None'
-          metadata: {
-            testKey: 'testValue'
-          }
-          enableWORM: true
-          WORMRetention: 666
-          allowProtectedAppendWrites: false
-        }
-      ]
-      automaticSnapshotPolicyEnabled: true
-      containerDeleteRetentionPolicyEnabled: true
-      containerDeleteRetentionPolicyDays: 10
-      deleteRetentionPolicy: true
-      deleteRetentionPolicyDays: 9
-    }
-    fileServices: {
-      shares: [
-        {
-          name: 'avdprofiles'
-          shareQuota: 5120
-          roleAssignments: [
-            {
-              roleDefinitionIdOrName: 'Reader'
-              principalIds: [
-                nestedDependencies.outputs.managedIdentityPrincipalId
-              ]
-              principalType: 'ServicePrincipal'
-            }
-          ]
-        }
-        {
-          name: 'avdprofiles2'
-          shareQuota: 102400
-        }
-      ]
-    }
-    tableServices: {
-      tables: [
-        'table1'
-        'table2'
-      ]
-    }
-    queueServices: {
-      queues: [
-        {
-          name: 'queue1'
-          metadata: {
-            key1: 'value1'
-            key2: 'value2'
-          }
-          roleAssignments: [
-            {
-              roleDefinitionIdOrName: 'Reader'
-              principalIds: [
-                nestedDependencies.outputs.managedIdentityPrincipalId
-              ]
-              principalType: 'ServicePrincipal'
-            }
-          ]
-        }
-        {
-          name: 'queue2'
-          metadata: {}
-        }
-      ]
-    }
     sasExpirationPeriod: '180.00:00:00'
     systemAssignedIdentity: true
     userAssignedIdentities: {

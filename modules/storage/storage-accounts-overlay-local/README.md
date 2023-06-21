@@ -62,7 +62,6 @@ This module is used to deploy a storage account, with the ability to deploy 1 or
 | `customDomainUseSubDomainName` | bool | `False` |  | Indicates whether indirect CName validation is enabled. This should only be set on updates. |
 | `defaultToOAuthAuthentication` | bool | `False` |  | A boolean flag which indicates whether the default authentication is OAuth or not. |
 | `enableDefaultTelemetry` | bool | `False` |  | Enable telemetry via a Globally Unique Identifier (GUID). |
-| `enableNfsV3` | bool | `False` |  | If true, enables NFS 3.0 support for the storage account. Requires enableHierarchicalNamespace to be true. |
 | `enableSftp` | bool | `False` |  | If true, enables Secure File Transfer Protocol for the storage account. Requires enableHierarchicalNamespace to be true. |
 | `isLocalUserEnabled` | bool | `False` |  | Enables local users feature, if set to true. |
 | `kind` | string | `'StorageV2'` | `[BlobStorage, BlockBlobStorage, FileStorage, Storage, StorageV2]` | Type of Storage Account to create. |
@@ -414,63 +413,9 @@ module storageAccountsOverlayLocal './storage/storage-accounts-overlay-local/mai
     // Required parameters
     name: '<<namePrefix>>ssaolc001'
     // Non-required parameters
-    blobServices: {
-      automaticSnapshotPolicyEnabled: true
-      containerDeleteRetentionPolicyDays: 10
-      containerDeleteRetentionPolicyEnabled: true
-      containers: [
-        {
-          name: 'avdscripts'
-          publicAccess: 'None'
-          roleAssignments: [
-            {
-              principalIds: [
-                '<managedIdentityPrincipalId>'
-              ]
-              principalType: 'ServicePrincipal'
-              roleDefinitionIdOrName: 'Reader'
-            }
-          ]
-        }
-        {
-          allowProtectedAppendWrites: false
-          enableWORM: true
-          metadata: {
-            testKey: 'testValue'
-          }
-          name: 'archivecontainer'
-          publicAccess: 'None'
-          WORMRetention: 666
-        }
-      ]
-      deleteRetentionPolicy: true
-      deleteRetentionPolicyDays: 9
-    }
     enableDefaultTelemetry: '<enableDefaultTelemetry>'
     enableHierarchicalNamespace: true
-    enableNfsV3: true
     enableSftp: true
-    fileServices: {
-      shares: [
-        {
-          name: 'avdprofiles'
-          roleAssignments: [
-            {
-              principalIds: [
-                '<managedIdentityPrincipalId>'
-              ]
-              principalType: 'ServicePrincipal'
-              roleDefinitionIdOrName: 'Reader'
-            }
-          ]
-          shareQuota: 5120
-        }
-        {
-          name: 'avdprofiles2'
-          shareQuota: 102400
-        }
-      ]
-    }
     largeFileSharesState: 'Enabled'
     localUsers: [
       {
@@ -505,30 +450,6 @@ module storageAccountsOverlayLocal './storage/storage-accounts-overlay-local/mai
         }
       }
     ]
-    queueServices: {
-      queues: [
-        {
-          metadata: {
-            key1: 'value1'
-            key2: 'value2'
-          }
-          name: 'queue1'
-          roleAssignments: [
-            {
-              principalIds: [
-                '<managedIdentityPrincipalId>'
-              ]
-              principalType: 'ServicePrincipal'
-              roleDefinitionIdOrName: 'Reader'
-            }
-          ]
-        }
-        {
-          metadata: {}
-          name: 'queue2'
-        }
-      ]
-    }
     roleAssignments: [
       {
         principalIds: [
@@ -541,12 +462,6 @@ module storageAccountsOverlayLocal './storage/storage-accounts-overlay-local/mai
     sasExpirationPeriod: '180.00:00:00'
     skuName: 'Standard_LRS'
     systemAssignedIdentity: true
-    tableServices: {
-      tables: [
-        'table1'
-        'table2'
-      ]
-    }
     tags: {
       Environment: 'Non-Prod'
       Role: 'DeploymentValidation'
@@ -575,74 +490,14 @@ module storageAccountsOverlayLocal './storage/storage-accounts-overlay-local/mai
       "value": "<<namePrefix>>ssaolc001"
     },
     // Non-required parameters
-    "blobServices": {
-      "value": {
-        "automaticSnapshotPolicyEnabled": true,
-        "containerDeleteRetentionPolicyDays": 10,
-        "containerDeleteRetentionPolicyEnabled": true,
-        "containers": [
-          {
-            "name": "avdscripts",
-            "publicAccess": "None",
-            "roleAssignments": [
-              {
-                "principalIds": [
-                  "<managedIdentityPrincipalId>"
-                ],
-                "principalType": "ServicePrincipal",
-                "roleDefinitionIdOrName": "Reader"
-              }
-            ]
-          },
-          {
-            "allowProtectedAppendWrites": false,
-            "enableWORM": true,
-            "metadata": {
-              "testKey": "testValue"
-            },
-            "name": "archivecontainer",
-            "publicAccess": "None",
-            "WORMRetention": 666
-          }
-        ],
-        "deleteRetentionPolicy": true,
-        "deleteRetentionPolicyDays": 9
-      }
-    },
     "enableDefaultTelemetry": {
       "value": "<enableDefaultTelemetry>"
     },
     "enableHierarchicalNamespace": {
       "value": true
     },
-    "enableNfsV3": {
-      "value": true
-    },
     "enableSftp": {
       "value": true
-    },
-    "fileServices": {
-      "value": {
-        "shares": [
-          {
-            "name": "avdprofiles",
-            "roleAssignments": [
-              {
-                "principalIds": [
-                  "<managedIdentityPrincipalId>"
-                ],
-                "principalType": "ServicePrincipal",
-                "roleDefinitionIdOrName": "Reader"
-              }
-            ],
-            "shareQuota": 5120
-          },
-          {
-            "name": "avdprofiles2",
-            "shareQuota": 102400
-          }
-        ]
-      }
     },
     "largeFileSharesState": {
       "value": "Enabled"
@@ -686,32 +541,6 @@ module storageAccountsOverlayLocal './storage/storage-accounts-overlay-local/mai
         }
       ]
     },
-    "queueServices": {
-      "value": {
-        "queues": [
-          {
-            "metadata": {
-              "key1": "value1",
-              "key2": "value2"
-            },
-            "name": "queue1",
-            "roleAssignments": [
-              {
-                "principalIds": [
-                  "<managedIdentityPrincipalId>"
-                ],
-                "principalType": "ServicePrincipal",
-                "roleDefinitionIdOrName": "Reader"
-              }
-            ]
-          },
-          {
-            "metadata": {},
-            "name": "queue2"
-          }
-        ]
-      }
-    },
     "roleAssignments": {
       "value": [
         {
@@ -731,14 +560,6 @@ module storageAccountsOverlayLocal './storage/storage-accounts-overlay-local/mai
     },
     "systemAssignedIdentity": {
       "value": true
-    },
-    "tableServices": {
-      "value": {
-        "tables": [
-          "table1",
-          "table2"
-        ]
-      }
     },
     "tags": {
       "value": {
