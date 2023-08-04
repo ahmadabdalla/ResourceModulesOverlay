@@ -1,4 +1,4 @@
-# User Assigned Identities (Overlay Remote) `[Microsoft.ManagedIdentity/userAssignedIdentitiesOverlayRemote]`
+# User Assigned Identities (Overlay Remote) `[Microsoft.ManagedIdentity/userAssignedIdentity]`
 
 This module deploys a user assigned identity (Overlay Remote).
 
@@ -167,7 +167,7 @@ The following module usage examples are retrieved from the content of the files 
 <summary>via Bicep module</summary>
 
 ```bicep
-module userAssignedIdentitiesOverlayRemote './managed-identity/user-assigned-identities-overlay-remote/main.bicep' = {
+module userAssignedIdentity './managed-identity/user-assigned-identity/main.bicep' = {
   name: '${uniqueString(deployment().name, location)}-test-miuaiocom'
   params: {
     // Required parameters
